@@ -1,0 +1,49 @@
+flowchart LR
+    subgraph S1["输入与理解"]
+        direction TB
+        A(["MMD / SVG 输入"])
+        B["读取节点、分组、边、标签与方向"]
+        C(["选择渲染路线"])
+        A --> B --> C
+    end
+
+    subgraph S2["SVG 生成"]
+        direction TB
+        D["Mermaid Runtime 直接渲染"]
+        E["ClaudeLike 模板设计 SVG"]
+        F["统一 SVG"]
+        D --> F
+        E --> F
+    end
+
+    subgraph S3["浏览器渲染"]
+        direction TB
+        G["脚本、事件与外部资源安全检查"]
+        H["嵌入本地 Noto Sans SC"]
+        I["Chromium 精确渲染"]
+        J["文字、节点、边线与裁切审计"]
+        G --> H --> I --> J
+    end
+
+    subgraph S4["质量闭环"]
+        direction TB
+        K["浏览器截图生成透明 2× PNG"]
+        L(["多模态视觉验收"])
+        M["调整布局或样式"]
+        N(["交付 SVG + PNG"])
+        K --> L
+        L -->|通过| N
+        L -->|未通过| M
+    end
+
+    C -->|直接渲染| D
+    C -->|需要重排或增强| E
+    F --> G
+    J -->|通过| K
+    J -->|失败| M
+    M --> C
+
+    classDef primary fill:#3976D8,stroke:#2457A6,color:#FFFFFF,stroke-width:2px;
+    classDef decision fill:#EAF2FF,stroke:#7EA6DD,color:#202938,stroke-width:1.5px;
+    class A,N primary;
+    class C,L decision;
