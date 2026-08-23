@@ -1,4 +1,14 @@
 interface:
-  display_name: "Mermaid SVG/PNG"
-  short_description: "将 MMD 忠实绘制为 ClaudeLike SVG 与 2× PNG"
-  default_prompt: "Use $render-mermaid to render this MMD as a ClaudeLike SVG and transparent 2× PNG."
+  display_name: Mermaid SVG/PNG
+  short_description: 将 MMD 忠实绘制为 ClaudeLike SVG 与 2× PNG
+  default_prompt: Use $render-mermaid to render this MMD as a ClaudeLike SVG and transparent
+    2× PNG.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
