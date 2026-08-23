@@ -1,0 +1,14 @@
+{
+  "name": "render-mermaid-skill",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Render Mermaid MMD diagrams as ClaudeLike SVG and transparent high-resolution PNG files.",
+  "scripts": {
+    "render": "node scripts/render.cjs",
+    "test": "node scripts/render.cjs tests/fixture.mmd --out-dir tests/output --scale 2 && node tests/verify.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "pngjs": "7.0.0"
+  }
+}

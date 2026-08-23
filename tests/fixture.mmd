@@ -1,0 +1,13 @@
+flowchart LR
+    subgraph DISPLAY["对外展示平台"]
+        direction TB
+        GW(["官网"])
+        GROUP(["飞书机器人群"])
+    end
+
+    GROUP <-->|"任务输入 / 结果展示"| FLOW(["自动化工作流"]):::asset
+    FLOW -->|"读写数据"| FS(["飞书"])
+    GROUP -.->|"未来接口"| CRM(["CRM系统"])
+
+    classDef asset fill:#3976D8,color:#FFFFFF,stroke:#20509A,stroke-width:2px;
+    style DISPLAY fill:transparent,stroke:#98A2B3,stroke-width:1.5px,stroke-dasharray:6 4;
