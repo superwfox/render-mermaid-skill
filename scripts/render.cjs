@@ -258,6 +258,12 @@ async function renderMmd(page, source) {
       }
       .node rect { rx: 16px; ry: 16px; }
       .cluster rect { rx: 24px; ry: 24px; fill-opacity: .82; }
+      .cluster-label text {
+        paint-order: stroke;
+        stroke: rgba(255, 255, 255, .96);
+        stroke-width: 6px;
+        stroke-linejoin: round;
+      }
       .node rect, .node circle, .node ellipse, .node polygon, .node path {
         stroke-linejoin: round;
         filter: drop-shadow(0 4px 8px rgba(15, 23, 42, .08));
