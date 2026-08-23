@@ -353,7 +353,8 @@ async function renderSvg(browser, svg, output, options) {
     const tolerance = 1.5;
     // Mermaid 11 uses SVG text for edge labels and foreignObject HTML for many
     // node labels. Audit both so the quality gate covers every visible label.
-    const text = [...root.querySelectorAll('text, foreignObject')];
+    const text = [...root.querySelectorAll('text, foreignObject')]
+      .filter((element) => (element.textContent || '').trim());
     const zeroSizeText = [];
     const clippedText = [];
     for (const element of text) {
