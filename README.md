@@ -13,4 +13,4 @@
 
 ## 实现原理
 
-// TODO 等待ChatGPT完善实现流程图
+![render-mermaid Skill 实现原理流程图](./assets/implementation-flow-2x.png)
