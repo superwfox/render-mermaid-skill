@@ -294,14 +294,14 @@ function dimensionsFromSvg(svg) {
 
 function assertSafeSvg(svg) {
   const forbidden = [
-    /<\s*(script|iframe|object|embed|foreignObject)\b/i,
+    /<\s*(script|iframe|object|embed|link|meta|base|form|input|button|select|textarea|video|audio|source)\b/i,
     /\son[a-z]+\s*=/i,
-    /(?:href|src)\s*=\s*["']\s*(?:javascript:|https?:|\/\/)/i,
+    /(?:href|src)\s*=\s*["']\s*(?!#)[^"']/i,
     /@import\b/i,
-    /url\(\s*["']?\s*(?:https?:|\/\/)/i,
+    /url\(\s*["']?\s*(?!#)[^)]+/i,
   ];
   if (forbidden.some((pattern) => pattern.test(svg))) {
-    fail('SVG contains active or external content; remove scripts, event handlers, foreign objects, and remote URLs before rendering');
+    fail('SVG contains active or external content; remove executable elements, event handlers, and non-fragment URLs before rendering');
   }
 }
 
@@ -345,7 +345,9 @@ async function renderSvg(browser, svg, output, options) {
     if (!root) throw new Error('No SVG root found');
     const rootRect = root.getBoundingClientRect();
     const tolerance = 1.5;
-    const text = [...root.querySelectorAll('text')];
+    // Mermaid 11 uses SVG text for edge labels and foreignObject HTML for many
+    // node labels. Audit both so the quality gate covers every visible label.
+    const text = [...root.querySelectorAll('text, foreignObject')];
     const zeroSizeText = [];
     const clippedText = [];
     for (const element of text) {
